@@ -224,12 +224,12 @@ export function StickyNote({
         <div
           ref={noteRef}
           data-note-card
-          className={`w-full p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl`}
+          className={`w-80 h-80 p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl flex flex-col`}
           style={{
             transform: `rotate(${baseRotation * 0.3}deg)`,
           }}
         >
-          <div className="flex items-start justify-between mb-2">
+          <div className="flex items-start justify-between mb-2 flex-shrink-0">
             <span className="text-sm font-bold text-[#6b5d4f] uppercase tracking-wide">{noteLabels[note.type]}</span>
             <div className="flex gap-1">
               {showEditDelete && (
@@ -250,7 +250,7 @@ export function StickyNote({
             </div>
           </div>
 
-          <div className="space-y-2 handwritten text-[#3d3226] break-words">
+          <div className="space-y-2 handwritten text-[#3d3226] break-words overflow-y-auto flex-1">
             {note.type === "list" && contentData.title ? (
               <>
                 <p className="font-bold text-xl break-words">{contentData.title}</p>
@@ -278,19 +278,17 @@ export function StickyNote({
                     <li className="text-base text-red-500">No items found</li>
                   )}
                 </ul>
-                {contentData.source && <p className="text-sm italic text-[#6b5d4f] mt-2">— {contentData.source}</p>}
               </>
             ) : (
-              <>
-                <p className="text-base leading-relaxed break-words">{contentData.text || note.content}</p>
-                {contentData.source && (
-                  <p className="text-sm italic text-[#6b5d4f] mt-2 break-words">— {contentData.source}</p>
-                )}
-              </>
+              <p className="text-base leading-relaxed break-words">{contentData.text || note.content}</p>
             )}
           </div>
 
-          <div className="mt-3 pt-2 border-t border-dashed border-[#6b5d4f]/30 flex items-center justify-between">
+          {contentData.source && (
+            <p className="text-sm italic text-[#6b5d4f] mt-2 break-words flex-shrink-0">— {contentData.source}</p>
+          )}
+
+          <div className="mt-3 pt-2 border-t border-dashed border-[#6b5d4f]/30 flex items-center justify-between flex-shrink-0">
             <p className="text-sm text-[#6b5d4f]">{new Date(note.created_at).toLocaleDateString()}</p>
             <Button
               variant="ghost"
@@ -322,17 +320,17 @@ export function StickyNote({
       <div
         ref={noteRef}
         data-note-card
-        className={`absolute w-64 p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg cursor-move transition-shadow hover:shadow-xl ${
-          isDragging ? "shadow-2xl scale-105" : ""
+        className={`absolute w-80 h-80 p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg cursor-move hover:shadow-xl flex flex-col ${
+          isDragging ? "shadow-2xl scale-105" : "transition-transform duration-200"
         }`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transform: isDragging ? `rotate(${baseRotation + 3}deg) scale(1.05)` : `rotate(${baseRotation}deg)`,
+          transform: isDragging ? `rotate(0deg) scale(1.05)` : `rotate(${baseRotation}deg)`,
         }}
         onMouseDown={handleMouseDown}
       >
-        <div className="flex items-start justify-between mb-2">
+        <div className="flex items-start justify-between mb-2 flex-shrink-0">
           <div className="flex items-center gap-1">
             <GripVertical className="w-4 h-4 text-[#6b5d4f] opacity-50" />
             <span className="text-sm font-bold text-[#6b5d4f] uppercase tracking-wide">{noteLabels[note.type]}</span>
@@ -356,7 +354,7 @@ export function StickyNote({
           </div>
         </div>
 
-        <div className="space-y-2 handwritten text-[#3d3226] break-words">
+        <div className="space-y-2 handwritten text-[#3d3226] break-words overflow-y-auto flex-1">
           {note.type === "list" && contentData.title ? (
             <>
               <p className="font-bold text-xl break-words">{contentData.title}</p>
@@ -384,19 +382,17 @@ export function StickyNote({
                   <li className="text-base text-red-500">No items found</li>
                 )}
               </ul>
-              {contentData.source && <p className="text-sm italic text-[#6b5d4f] mt-2">— {contentData.source}</p>}
             </>
           ) : (
-            <>
-              <p className="text-base leading-relaxed break-words">{contentData.text || note.content}</p>
-              {contentData.source && (
-                <p className="text-sm italic text-[#6b5d4f] mt-2 break-words">— {contentData.source}</p>
-              )}
-            </>
+            <p className="text-base leading-relaxed break-words">{contentData.text || note.content}</p>
           )}
         </div>
 
-        <div className="mt-3 pt-2 border-t border-dashed border-[#6b5d4f]/30 flex items-center justify-between">
+        {contentData.source && (
+          <p className="text-sm italic text-[#6b5d4f] mt-2 break-words flex-shrink-0">— {contentData.source}</p>
+        )}
+
+        <div className="mt-3 pt-2 border-t border-dashed border-[#6b5d4f]/30 flex items-center justify-between flex-shrink-0">
           <p className="text-sm text-[#6b5d4f]">{new Date(note.created_at).toLocaleDateString()}</p>
           <Button
             variant="ghost"
