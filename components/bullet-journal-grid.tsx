@@ -555,34 +555,32 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
           )}
         </div>
 
-        {viewMode === "canvas" && (
-          <div className="absolute bottom-20 right-4 flex flex-col gap-2 pointer-events-auto z-20">
-            <Button
-              onClick={handleZoomIn}
-              size="icon"
-              className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
-              title="Zoom In"
-            >
-              <ZoomIn className="w-5 h-5" />
-            </Button>
-            <Button
-              onClick={handleZoomOut}
-              size="icon"
-              className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
-              title="Zoom Out"
-            >
-              <ZoomOut className="w-5 h-5" />
-            </Button>
-            <Button
-              onClick={handleResetView}
-              size="icon"
-              className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
-              title="Actual Size"
-            >
-              <Maximize2 className="w-5 h-5" />
-            </Button>
-          </div>
-        )}
+        <div className="absolute bottom-20 right-4 flex flex-col gap-2 pointer-events-auto z-20">
+          <Button
+            onClick={handleZoomIn}
+            size="icon"
+            className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
+            title="Zoom In"
+          >
+            <ZoomIn className="w-5 h-5" />
+          </Button>
+          <Button
+            onClick={handleZoomOut}
+            size="icon"
+            className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
+            title="Zoom Out"
+          >
+            <ZoomOut className="w-5 h-5" />
+          </Button>
+          <Button
+            onClick={handleResetView}
+            size="icon"
+            className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-[#f4e4c1] text-[#3d3226] border-2 border-[#3d3226] shadow-[2px_2px_0px_0px_rgba(61,50,38,1)] hover:shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] transition-all"
+            title="Actual Size"
+          >
+            <Maximize2 className="w-5 h-5" />
+          </Button>
+        </div>
       </div>
 
       <AddNoteDialog
