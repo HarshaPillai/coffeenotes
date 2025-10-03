@@ -556,7 +556,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
         </div>
 
         {viewMode === "canvas" && (
-          <div className="absolute bottom-4 right-4 flex flex-col gap-2 pointer-events-auto z-10">
+          <div className="absolute bottom-20 right-4 flex flex-col gap-2 pointer-events-auto z-20">
             <Button
               onClick={handleZoomIn}
               size="icon"
