@@ -155,25 +155,25 @@ export function AddNoteDialog({
             <div className="grid grid-cols-2 gap-3 mt-4">
               <Button
                 onClick={() => setSelectedType("rambling")}
-                className="h-24 bg-[#fff4d6] hover:bg-[#ffe8b3] text-[#3d3226] border-2 border-[#f4d35e] handwritten text-lg"
+                className="h-24 bg-[#fff4d6] hover:bg-[#ffe8b3] text-[#3d3226] border-2 border-[#f4d35e] handwritten text-lg whitespace-normal break-words leading-tight px-2"
               >
                 Reflections
               </Button>
               <Button
                 onClick={() => setSelectedType("good-advice")}
-                className="h-24 bg-[#d4f4dd] hover:bg-[#b8e8c5] text-[#3d3226] border-2 border-[#95d5b2] handwritten text-lg"
+                className="h-24 bg-[#d4f4dd] hover:bg-[#b8e8c5] text-[#3d3226] border-2 border-[#95d5b2] handwritten text-lg whitespace-normal break-words leading-tight px-2"
               >
                 Actionable Advice ✓
               </Button>
               <Button
                 onClick={() => setSelectedType("bad-advice")}
-                className="h-24 bg-[#ffd6d6] hover:bg-[#ffb3b3] text-[#3d3226] border-2 border-[#ff9999] handwritten text-lg"
+                className="h-24 bg-[#ffd6d6] hover:bg-[#ffb3b3] text-[#3d3226] border-2 border-[#ff9999] handwritten text-lg whitespace-normal break-words leading-tight px-2"
               >
                 Take with Caution !
               </Button>
               <Button
                 onClick={() => setSelectedType("list")}
-                className="h-24 bg-[#d6e8ff] hover:bg-[#b3d4ff] text-[#3d3226] border-2 border-[#99c2ff] handwritten text-lg"
+                className="h-24 bg-[#d6e8ff] hover:bg-[#b3d4ff] text-[#3d3226] border-2 border-[#99c2ff] handwritten text-lg whitespace-normal break-words leading-tight px-2"
               >
                 Resources & Tools
               </Button>
@@ -233,12 +233,12 @@ export function AddNoteDialog({
                           key={i}
                           className="flex items-center justify-between bg-white p-2 rounded border border-[#d4c5b0]"
                         >
-                          <span className="handwritten text-sm break-words">{item}</span>
+                          <span className="handwritten text-sm break-all flex-1 mr-2">{item}</span>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => removeListItem(i)}
-                            className="h-6 w-6"
+                            className="h-6 w-6 flex-shrink-0"
                             type="button"
                           >
                             <X className="w-3 h-3" />
@@ -255,22 +255,22 @@ export function AddNoteDialog({
                         <SelectValue placeholder="Select who shared this" />
                       </SelectTrigger>
                       <SelectContent className="bg-[#faf8f3] border-2 border-[#3d3226]">
-                        <SelectItem value="Recruiter" className="handwritten">
+                        <SelectItem value="Recruiter" className="handwritten break-words">
                           Recruiter
                         </SelectItem>
-                        <SelectItem value="Senior Designer" className="handwritten">
+                        <SelectItem value="Senior Designer" className="handwritten break-words">
                           Senior Designer
                         </SelectItem>
-                        <SelectItem value="Mid-Level Designer" className="handwritten">
+                        <SelectItem value="Mid-Level Designer" className="handwritten break-words">
                           Mid-Level Designer
                         </SelectItem>
-                        <SelectItem value="Professor" className="handwritten">
+                        <SelectItem value="Professor" className="handwritten break-words">
                           Professor
                         </SelectItem>
-                        <SelectItem value="Colleague" className="handwritten">
+                        <SelectItem value="Colleague" className="handwritten break-words">
                           Colleague
                         </SelectItem>
-                        <SelectItem value="Other" className="handwritten">
+                        <SelectItem value="Other" className="handwritten break-words">
                           Other
                         </SelectItem>
                       </SelectContent>
@@ -317,26 +317,26 @@ export function AddNoteDialog({
                       </SelectTrigger>
                       <SelectContent className="bg-[#faf8f3] border-2 border-[#3d3226]">
                         {selectedType === "rambling" && (
-                          <SelectItem value="Myself" className="handwritten">
+                          <SelectItem value="Myself" className="handwritten break-words">
                             Myself
                           </SelectItem>
                         )}
-                        <SelectItem value="Recruiter" className="handwritten">
+                        <SelectItem value="Recruiter" className="handwritten break-words">
                           Recruiter
                         </SelectItem>
-                        <SelectItem value="Senior Designer" className="handwritten">
+                        <SelectItem value="Senior Designer" className="handwritten break-words">
                           Senior Designer
                         </SelectItem>
-                        <SelectItem value="Mid-Level Designer" className="handwritten">
+                        <SelectItem value="Mid-Level Designer" className="handwritten break-words">
                           Mid-Level Designer
                         </SelectItem>
-                        <SelectItem value="Professor" className="handwritten">
+                        <SelectItem value="Professor" className="handwritten break-words">
                           Professor
                         </SelectItem>
-                        <SelectItem value="Colleague" className="handwritten">
+                        <SelectItem value="Colleague" className="handwritten break-words">
                           Colleague
                         </SelectItem>
-                        <SelectItem value="Other" className="handwritten">
+                        <SelectItem value="Other" className="handwritten break-words">
                           Other
                         </SelectItem>
                       </SelectContent>
