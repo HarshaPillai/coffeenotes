@@ -54,6 +54,9 @@ export function AddNoteDialog({
   const [listItems, setListItems] = useState<string[]>([])
   const [currentItem, setCurrentItem] = useState("")
 
+  const MAX_CHARACTERS = 350
+  const MAX_LIST_ITEMS = 5
+
   const resetForm = () => {
     setSelectedType(null)
     setContent("")
@@ -109,7 +112,7 @@ export function AddNoteDialog({
   }
 
   const addListItem = () => {
-    if (currentItem.trim()) {
+    if (currentItem.trim() && listItems.length < MAX_LIST_ITEMS) {
       setListItems([...listItems, currentItem.trim()])
       setCurrentItem("")
     }
@@ -190,7 +193,12 @@ export function AddNoteDialog({
                   </div>
 
                   <div>
-                    <Label className="handwritten text-[#3d3226]">Items</Label>
+                    <div className="flex items-center justify-between mb-1">
+                      <Label className="handwritten text-[#3d3226]">Items</Label>
+                      <span className="text-xs text-[#6b5d4f] handwritten">
+                        {listItems.length} / {MAX_LIST_ITEMS}
+                      </span>
+                    </div>
                     <div className="flex gap-2">
                       <Input
                         value={currentItem}
@@ -203,11 +211,22 @@ export function AddNoteDialog({
                         }}
                         placeholder="Add an item"
                         className="handwritten bg-white border-2 border-[#3d3226]"
+                        disabled={listItems.length >= MAX_LIST_ITEMS}
                       />
-                      <Button onClick={addListItem} size="icon" type="button">
+                      <Button
+                        onClick={addListItem}
+                        size="icon"
+                        type="button"
+                        disabled={listItems.length >= MAX_LIST_ITEMS}
+                      >
                         <Plus className="w-4 h-4" />
                       </Button>
                     </div>
+                    {listItems.length >= MAX_LIST_ITEMS && (
+                      <p className="text-xs text-[#6b5d4f] mt-1 handwritten">
+                        Maximum of {MAX_LIST_ITEMS} items reached
+                      </p>
+                    )}
                     <ul className="mt-2 space-y-1">
                       {listItems.map((item, i) => (
                         <li
@@ -270,12 +289,18 @@ export function AddNoteDialog({
               ) : (
                 <>
                   <div>
-                    <Label className="handwritten text-[#3d3226]">Content</Label>
+                    <div className="flex items-center justify-between mb-1">
+                      <Label className="handwritten text-[#3d3226]">Content</Label>
+                      <span className="text-xs text-[#6b5d4f] handwritten">
+                        {content.length} / {MAX_CHARACTERS}
+                      </span>
+                    </div>
                     <Textarea
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
                       placeholder="Write your note..."
                       className="handwritten bg-white border-2 border-[#3d3226] min-h-32"
+                      maxLength={MAX_CHARACTERS}
                     />
                   </div>
 

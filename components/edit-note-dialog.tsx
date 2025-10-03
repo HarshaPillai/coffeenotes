@@ -48,6 +48,9 @@ export function EditNoteDialog({
   const [focusIndex, setFocusIndex] = useState<number | null>(null)
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
+  const MAX_CHARACTERS = 350
+  const MAX_LIST_ITEMS = 5
+
   useEffect(() => {
     if (focusIndex !== null && inputRefs.current[focusIndex]) {
       inputRefs.current[focusIndex]?.focus()
@@ -109,10 +112,12 @@ export function EditNoteDialog({
   const handleItemKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === "Enter") {
       e.preventDefault()
-      const newItems = [...items]
-      newItems.splice(index + 1, 0, "")
-      setItems(newItems)
-      setFocusIndex(index + 1)
+      if (items.length < MAX_LIST_ITEMS) {
+        const newItems = [...items]
+        newItems.splice(index + 1, 0, "")
+        setItems(newItems)
+        setFocusIndex(index + 1)
+      }
     }
   }
 
@@ -140,7 +145,12 @@ export function EditNoteDialog({
                 />
               </div>
               <div>
-                <Label className="text-[#3d3226]">Items</Label>
+                <div className="flex items-center justify-between mb-1">
+                  <Label className="text-[#3d3226]">Items</Label>
+                  <span className="text-xs text-[#6b5d4f] handwritten">
+                    {items.filter((item) => item.trim() !== "").length} / {MAX_LIST_ITEMS}
+                  </span>
+                </div>
                 {items.map((item, index) => (
                   <div key={index} className="flex gap-2 mb-2">
                     <Input
@@ -176,22 +186,32 @@ export function EditNoteDialog({
                     setFocusIndex(items.length)
                   }}
                   className="mt-2"
+                  disabled={items.length >= MAX_LIST_ITEMS}
                 >
                   Add Item
                 </Button>
+                {items.length >= MAX_LIST_ITEMS && (
+                  <p className="text-xs text-[#6b5d4f] mt-1 handwritten">Maximum of {MAX_LIST_ITEMS} items reached</p>
+                )}
               </div>
             </>
           ) : (
             <div>
-              <Label htmlFor="text" className="text-[#3d3226]">
-                Note Text
-              </Label>
+              <div className="flex items-center justify-between mb-1">
+                <Label htmlFor="text" className="text-[#3d3226]">
+                  Note Text
+                </Label>
+                <span className="text-xs text-[#6b5d4f] handwritten">
+                  {text.length} / {MAX_CHARACTERS}
+                </span>
+              </div>
               <Textarea
                 id="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 className="border-2 border-[#d4c5b0] min-h-[150px]"
                 required
+                maxLength={MAX_CHARACTERS}
               />
             </div>
           )}
