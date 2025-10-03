@@ -289,21 +289,21 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 md:hidden">
             <Button
               onClick={() => setIsAddDialogOpen(true)}
-              className="w-full md:hidden bg-[#f4e4c1] hover:bg-[#e8d4a8] text-[#3d3226] border-2 border-[#3d3226] shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] hover:shadow-[5px_5px_0px_0px_rgba(61,50,38,1)] transition-all handwritten text-lg h-auto py-3"
+              className="w-full bg-[#f4e4c1] hover:bg-[#e8d4a8] text-[#3d3226] border-2 border-[#3d3226] shadow-[3px_3px_0px_0px_rgba(61,50,38,1)] hover:shadow-[5px_5px_0px_0px_rgba(61,50,38,1)] transition-all handwritten text-lg h-auto py-3"
             >
               <Plus className="w-5 h-5 mr-2" />
               Add Note
             </Button>
 
-            <div className="flex items-center justify-center md:justify-start gap-2">
+            <div className="flex items-center justify-center gap-2">
               <Button
                 variant={viewMode === "canvas" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setViewMode("canvas")}
-                className={`h-9 px-3 handwritten flex-1 md:flex-initial ${
+                className={`h-9 px-3 handwritten flex-1 ${
                   viewMode === "canvas"
                     ? "bg-[#3d3226] text-white hover:bg-[#3d3226]/90"
                     : "bg-white text-[#3d3226] border-2 border-[#d4c5b0] hover:bg-[#f4e4c1]"
@@ -316,7 +316,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
                 variant={viewMode === "grid" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setViewMode("grid")}
-                className={`h-9 px-3 handwritten flex-1 md:flex-initial ${
+                className={`h-9 px-3 handwritten flex-1 ${
                   viewMode === "grid"
                     ? "bg-[#3d3226] text-white hover:bg-[#3d3226]/90"
                     : "bg-white text-[#3d3226] border-2 border-[#d4c5b0] hover:bg-[#f4e4c1]"
@@ -329,7 +329,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
                 onClick={() => setShowFilters(!showFilters)}
                 variant="outline"
                 size="sm"
-                className={`h-9 px-3 md:hidden ${
+                className={`h-9 px-3 ${
                   showFilters
                     ? "bg-[#3d3226] text-white hover:bg-[#3d3226]/90"
                     : "bg-white text-[#3d3226] border-2 border-[#d4c5b0] hover:bg-[#f4e4c1]"
@@ -342,128 +342,153 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
               </Button>
             </div>
 
-            <div className="md:hidden">
-              {showFilters && (
-                <div className="space-y-3 p-3 bg-white border-2 border-[#d4c5b0] rounded-lg">
-                  <Select value={typeFilter} onValueChange={setTypeFilter}>
-                    <SelectTrigger className="w-full h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
-                      <SelectValue placeholder="Note Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="rambling">Reflections</SelectItem>
-                      <SelectItem value="good-advice">Actionable Advice</SelectItem>
-                      <SelectItem value="list">Resources & Tools</SelectItem>
-                      <SelectItem value="bad-advice">Take with Caution</SelectItem>
-                    </SelectContent>
-                  </Select>
+            {showFilters && (
+              <div className="space-y-3 p-3 bg-white border-2 border-[#d4c5b0] rounded-lg">
+                <Select value={typeFilter} onValueChange={setTypeFilter}>
+                  <SelectTrigger className="w-full h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
+                    <SelectValue placeholder="Note Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Types</SelectItem>
+                    <SelectItem value="rambling">Reflections</SelectItem>
+                    <SelectItem value="good-advice">Actionable Advice</SelectItem>
+                    <SelectItem value="list">Resources & Tools</SelectItem>
+                    <SelectItem value="bad-advice">Take with Caution</SelectItem>
+                  </SelectContent>
+                </Select>
 
-                  <Select value={givenByFilter} onValueChange={setGivenByFilter}>
-                    <SelectTrigger className="w-full h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
-                      <SelectValue placeholder="Given By" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Sources</SelectItem>
-                      <SelectItem value="recruiter">Recruiter</SelectItem>
-                      <SelectItem value="senior designer">Senior Designer</SelectItem>
-                      <SelectItem value="mid-level designer">Mid-Level Designer</SelectItem>
-                      <SelectItem value="professor">Professor</SelectItem>
-                      <SelectItem value="colleague">Colleague</SelectItem>
-                      <SelectItem value="myself">Myself</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <Select value={givenByFilter} onValueChange={setGivenByFilter}>
+                  <SelectTrigger className="w-full h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
+                    <SelectValue placeholder="Given By" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Sources</SelectItem>
+                    <SelectItem value="recruiter">Recruiter</SelectItem>
+                    <SelectItem value="senior designer">Senior Designer</SelectItem>
+                    <SelectItem value="mid-level designer">Mid-Level Designer</SelectItem>
+                    <SelectItem value="professor">Professor</SelectItem>
+                    <SelectItem value="colleague">Colleague</SelectItem>
+                    <SelectItem value="myself">Myself</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
 
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b5d4f]" />
-                    <Input
-                      type="text"
-                      placeholder="Search notes..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9 h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten placeholder:text-[#6b5d4f]/50"
-                    />
-                  </div>
-
-                  {(typeFilter !== "all" || givenByFilter !== "all" || searchQuery) && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        setTypeFilter("all")
-                        setGivenByFilter("all")
-                        setSearchQuery("")
-                      }}
-                      className="w-full text-sm text-[#6b5d4f] hover:text-[#3d3226] handwritten"
-                    >
-                      Clear Filters
-                    </Button>
-                  )}
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b5d4f]" />
+                  <Input
+                    type="text"
+                    placeholder="Search notes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-9 h-10 text-sm bg-white border-2 border-[#d4c5b0] handwritten placeholder:text-[#6b5d4f]/50"
+                  />
                 </div>
-              )}
+
+                {(typeFilter !== "all" || givenByFilter !== "all" || searchQuery) && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setTypeFilter("all")
+                      setGivenByFilter("all")
+                      setSearchQuery("")
+                    }}
+                    className="w-full text-sm text-[#6b5d4f] hover:text-[#3d3226] handwritten"
+                  >
+                    Clear Filters
+                  </Button>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="hidden md:flex flex-wrap items-center gap-3 pb-2">
+            <Button
+              variant={viewMode === "canvas" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("canvas")}
+              className={`h-9 px-3 handwritten ${
+                viewMode === "canvas"
+                  ? "bg-[#3d3226] text-white hover:bg-[#3d3226]/90"
+                  : "bg-white text-[#3d3226] border-2 border-[#d4c5b0] hover:bg-[#f4e4c1]"
+              }`}
+            >
+              <Sparkles className="w-4 h-4 mr-1" />
+              Canvas
+            </Button>
+            <Button
+              variant={viewMode === "grid" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setViewMode("grid")}
+              className={`h-9 px-3 handwritten ${
+                viewMode === "grid"
+                  ? "bg-[#3d3226] text-white hover:bg-[#3d3226]/90"
+                  : "bg-white text-[#3d3226] border-2 border-[#d4c5b0] hover:bg-[#f4e4c1]"
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4 mr-1" />
+              Grid
+            </Button>
+
+            <div className="flex items-center gap-2 text-[#6b5d4f]">
+              <Filter className="w-4 h-4" />
+              <span className="text-sm font-medium">Filters:</span>
             </div>
 
-            <div className="hidden md:flex flex-wrap items-center gap-3 pb-2">
-              <div className="flex items-center gap-2 text-[#6b5d4f]">
-                <Filter className="w-4 h-4" />
-                <span className="text-sm font-medium">Filters:</span>
-              </div>
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTrigger className="w-[180px] h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
+                <SelectValue placeholder="Note Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem value="rambling">Reflections</SelectItem>
+                <SelectItem value="good-advice">Actionable Advice</SelectItem>
+                <SelectItem value="list">Resources & Tools</SelectItem>
+                <SelectItem value="bad-advice">Take with Caution</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <Select value={typeFilter} onValueChange={setTypeFilter}>
-                <SelectTrigger className="w-[180px] h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
-                  <SelectValue placeholder="Note Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
-                  <SelectItem value="rambling">Reflections</SelectItem>
-                  <SelectItem value="good-advice">Actionable Advice</SelectItem>
-                  <SelectItem value="list">Resources & Tools</SelectItem>
-                  <SelectItem value="bad-advice">Take with Caution</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select value={givenByFilter} onValueChange={setGivenByFilter}>
+              <SelectTrigger className="w-[180px] h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
+                <SelectValue placeholder="Given By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Sources</SelectItem>
+                <SelectItem value="recruiter">Recruiter</SelectItem>
+                <SelectItem value="senior designer">Senior Designer</SelectItem>
+                <SelectItem value="mid-level designer">Mid-Level Designer</SelectItem>
+                <SelectItem value="professor">Professor</SelectItem>
+                <SelectItem value="colleague">Colleague</SelectItem>
+                <SelectItem value="myself">Myself</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <Select value={givenByFilter} onValueChange={setGivenByFilter}>
-                <SelectTrigger className="w-[180px] h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten">
-                  <SelectValue placeholder="Given By" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Sources</SelectItem>
-                  <SelectItem value="recruiter">Recruiter</SelectItem>
-                  <SelectItem value="senior designer">Senior Designer</SelectItem>
-                  <SelectItem value="mid-level designer">Mid-Level Designer</SelectItem>
-                  <SelectItem value="professor">Professor</SelectItem>
-                  <SelectItem value="colleague">Colleague</SelectItem>
-                  <SelectItem value="myself">Myself</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b5d4f]" />
-                <Input
-                  type="text"
-                  placeholder="Search notes..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten placeholder:text-[#6b5d4f]/50"
-                />
-              </div>
-
-              {(typeFilter !== "all" || givenByFilter !== "all" || searchQuery) && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setTypeFilter("all")
-                    setGivenByFilter("all")
-                    setSearchQuery("")
-                  }}
-                  className="text-sm text-[#6b5d4f] hover:text-[#3d3226] handwritten"
-                >
-                  Clear Filters
-                </Button>
-              )}
+            <div className="relative flex-1 min-w-[200px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b5d4f]" />
+              <Input
+                type="text"
+                placeholder="Search notes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9 h-9 text-sm bg-white border-2 border-[#d4c5b0] handwritten placeholder:text-[#6b5d4f]/50"
+              />
             </div>
+
+            {(typeFilter !== "all" || givenByFilter !== "all" || searchQuery) && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setTypeFilter("all")
+                  setGivenByFilter("all")
+                  setSearchQuery("")
+                }}
+                className="text-sm text-[#6b5d4f] hover:text-[#3d3226] handwritten"
+              >
+                Clear Filters
+              </Button>
+            )}
           </div>
         </div>
       </div>
