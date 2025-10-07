@@ -188,6 +188,7 @@ export function StickyNote({
         const data = await response.json()
         setLikes(data.likes)
         setIsLiked(data.isLiked)
+        onNoteUpdated({ ...note, likes: data.likes })
       } else {
         setIsLiked(wasLiked)
         setLikes((prev) => (wasLiked ? prev + 1 : prev - 1))
@@ -224,7 +225,7 @@ export function StickyNote({
         <div
           ref={noteRef}
           data-note-card
-          className={`aspect-square p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl flex flex-col`}
+          className={`w-80 h-80 p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl flex flex-col`}
         >
           <div className="flex items-start justify-between mb-2 flex-shrink-0">
             <span className="text-sm font-bold text-[#6b5d4f] uppercase tracking-wide">{noteLabels[note.type]}</span>
