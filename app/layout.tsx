@@ -25,9 +25,6 @@ export const metadata: Metadata = {
   description:
     "Coffee Notes is a collective archive of advice gathered from our coffee chats with mentors, recruiters, and peers.",
   generator: "v0.app",
-  icons: {
-    icon: "/icon.svg",
-  },
 }
 
 export default function RootLayout({
