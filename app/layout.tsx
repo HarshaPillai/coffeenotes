@@ -28,6 +28,27 @@ export const metadata: Metadata = {
   icons: {
     icon: "/icon.svg",
   },
+  openGraph: {
+    title: "Coffee Notes",
+    description:
+      "Coffee Notes is a collective archive of advice gathered from our coffee chats with mentors, recruiters, and peers. As junior designers, we often wonder how to give back — and this is our way: sharing the notes that helped us take the next step.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Coffee Notes Logo",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coffee Notes",
+    description:
+      "Coffee Notes is a collective archive of advice gathered from our coffee chats with mentors, recruiters, and peers.",
+    images: ["/og-image.png"],
+  },
 }
 
 export default function RootLayout({
