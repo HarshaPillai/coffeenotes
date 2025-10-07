@@ -224,10 +224,7 @@ export function StickyNote({
         <div
           ref={noteRef}
           data-note-card
-          className={`w-80 h-80 p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl flex flex-col`}
-          style={{
-            transform: `rotate(${baseRotation * 0.3}deg)`,
-          }}
+          className={`aspect-square p-4 pointer-events-auto ${noteColors[note.type]} border-2 shadow-lg transition-all hover:shadow-xl flex flex-col`}
         >
           <div className="flex items-start justify-between mb-2 flex-shrink-0">
             <span className="text-sm font-bold text-[#6b5d4f] uppercase tracking-wide">{noteLabels[note.type]}</span>

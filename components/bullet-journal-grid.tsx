@@ -189,6 +189,20 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
     return true
   })
 
+  const sortedNotes = [...filteredNotes].sort((a, b) => {
+    // Primary sort: by likes (most liked first)
+    const likesA = a.likes || 0
+    const likesB = b.likes || 0
+    if (likesB !== likesA) {
+      return likesB - likesA
+    }
+
+    // Secondary sort: by date (most recent first)
+    const dateA = new Date(a.created_at).getTime()
+    const dateB = new Date(b.created_at).getTime()
+    return dateB - dateA
+  })
+
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       const target = e.target as HTMLElement
@@ -516,7 +530,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
             transition: isPanning ? "none" : "transform 0.1s ease-out",
           }}
         >
-          {filteredNotes.length === 0 ? (
+          {sortedNotes.length === 0 ? (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <p className="text-lg text-[#6b5d4f] handwritten">
                 {searchQuery || typeFilter !== "all" || givenByFilter !== "all"
@@ -525,8 +539,8 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
               </p>
             </div>
           ) : viewMode === "grid" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 pointer-events-auto">
-              {filteredNotes.map((note) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-10 gap-8 p-8 pointer-events-auto">
+              {sortedNotes.map((note) => (
                 <StickyNote
                   key={note.id}
                   note={note}
@@ -540,7 +554,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
               ))}
             </div>
           ) : (
-            filteredNotes.map((note) => (
+            sortedNotes.map((note) => (
               <StickyNote
                 key={note.id}
                 note={note}
