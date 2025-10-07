@@ -539,7 +539,7 @@ export function BulletJournalGrid({ initialNotes }: { initialNotes: Note[] }) {
               </p>
             </div>
           ) : viewMode === "grid" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-10 gap-16 p-8 pointer-events-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 pointer-events-auto">
               {sortedNotes.map((note) => (
                 <StickyNote
                   key={note.id}
